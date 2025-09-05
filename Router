@@ -1,0 +1,53 @@
+R1
+
+enable
+configure terminal
+hostname R1
+
+ ip address 192.168.1.1 255.255.255.0
+ no shutdown
+
+interface Serial0/0
+ ip address 10.0.0.1 255.255.255.252
+ no shutdown
+
+ip route 192.168.3.0 255.255.255.0 10.0.0.2
+end
+write
+
+
+R2
+enable
+configure terminal
+hostname R2
+
+interface Serial0/0
+ ip address 10.0.0.2 255.255.255.252
+ no shutdown
+
+interface Serial0/1
+ ip address 10.0.0.5 255.255.255.252
+ no shutdown
+
+ip route 192.168.1.0 255.255.255.0 10.0.0.1
+
+ip route 192.168.3.0 255.255.255.0 10.0.0.6
+end
+write
+
+R3
+enable
+configure terminal
+hostname R3
+
+interface FastEthernet0/0
+ ip address 192.168.3.1 255.255.255.0
+ no shutdown
+
+interface Serial0/0
+ ip address 10.0.0.6 255.255.255.252
+ no shutdown
+
+ip route 192.168.1.0 255.255.255.0 10.0.0.5
+end
+write
